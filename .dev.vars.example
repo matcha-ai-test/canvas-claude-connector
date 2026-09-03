@@ -1,0 +1,23 @@
+# Secrets for the Worker. "Deploy to Cloudflare" asks for these during setup.
+# For local development: copy this file to .dev.vars and fill in the values.
+# Never commit .dev.vars.
+
+# Your school's Canvas address — what you see in the browser bar when you're in Canvas.
+CANVAS_URL="https://canvas.yourschool.edu"
+
+# Your Canvas access token: Canvas → Account → Settings → "+ New Access Token".
+# Treat it like a password: it gives full access to your Canvas account.
+CANVAS_TOKEN=""
+
+# A password you invent. You type it once when connecting from claude.ai.
+MCP_SECRET=""
+
+# ---------- Optional ----------
+
+# Short display name for the school (default: the Canvas hostname).
+# CANVAS_LABEL=""
+
+# A second school, if you study at two institutions.
+# CANVAS_URL_2=""
+# CANVAS_TOKEN_2=""
+# CANVAS_LABEL_2=""

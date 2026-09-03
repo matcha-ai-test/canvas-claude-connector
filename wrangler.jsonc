@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "canvas-claude-connector",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "durable_objects": {
+    "bindings": [{ "name": "MCP_OBJECT", "class_name": "CanvasMCP" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["CanvasMCP"] }],
+  // OAuth tokens and the login rate limiter live here. "Deploy to Cloudflare" creates a
+  // namespace for you and replaces the placeholder id. For a manual deploy, run
+  // `npx wrangler kv namespace create OAUTH_KV` and paste the id it prints below.
+  "kv_namespaces": [{ "binding": "OAUTH_KV", "id": "00000000000000000000000000000000" }],
+  "observability": { "enabled": true }
+}

@@ -1,0 +1,31 @@
+# Dependencies and build output
+node_modules/
+.wrangler/
+dist/
+
+# Secrets — never commit these
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.env
+.env.*
+wrangler.toml
+
+# Course material downloaded while testing
+tmp/
+scratch/
+*.pdf
+*.pptx
+*.docx
+*.har
+
+# Editor and assistant state (often contains local paths). CLAUDE.md / AGENTS.md at the
+# root are part of the repo — they tell coding agents how to install this.
+.vscode/
+.idea/
+.claude/
+.codex/
+
+# OS
+.DS_Store
+*.log

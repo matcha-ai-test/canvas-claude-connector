@@ -1,0 +1,26 @@
+{
+  "name": "canvas-claude-connector",
+  "version": "1.0.0",
+  "description": "Read-only Canvas LMS connector for Claude, hosted on Cloudflare Workers. One-click deploy.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "@cloudflare/workers-oauth-provider": "^0.10.3",
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "agents": "^0.21.0",
+    "unpdf": "^1.8.1",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260815.1",
+    "typescript": "^5.7.0",
+    "wrangler": "^4.124.0"
+  }
+}
