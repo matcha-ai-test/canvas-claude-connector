@@ -16,8 +16,8 @@ Everything below is a summary in our own words — check the links above when it
   Access Token"**. Direct link pattern: `https://<canvas-host>/profile/settings`.
 - A token has the **same permissions as the user** and cannot be scoped down. Treat it as
   a password.
-- Schools can disable self-service tokens (the button is missing or errors out). Then the
-  token has to come from the school's IT, or the connector can't be used there.
+- Institutions can disable self-service tokens (the button is missing or errors out). Then the
+  token has to come from the institution's IT, or the connector can't be used there.
 - Tokens can have an expiry date set at creation. Canvas shows "last used" on the token
   page, and the user can revoke it there at any time.
 - Format: `<number>~<long random string>`. The connector sends it as
@@ -26,7 +26,7 @@ Everything below is a summary in our own words — check the links above when it
 ## Base URL
 
 The API lives at `https://<canvas-host>/api/v1`. The connector accepts the plain host
-(`https://canvas.yourschool.edu`) and adds `/api/v1` itself. Both `<school>.instructure.com`
+(`https://canvas.yourschool.edu`) and adds `/api/v1` itself. Both `<institution>.instructure.com`
 (Instructure-hosted) and self-hosted domains work the same way.
 
 ## Status codes you will see

@@ -1,4 +1,4 @@
-# Canvas → Claude connector
+# Canvas MCP connector
 
 **What this is:** an MCP server (a "custom connector") that lets Claude read your Canvas
 courses — lecture slides, assignments, deadlines, announcements, reading lists,
@@ -15,7 +15,7 @@ ahead — the code is MIT and the tools are plain MCP.)
   keep running on your laptop. Works in claude.ai on web, desktop and phone.
 - **Read-only, by construction.** The code can only *fetch* from Canvas. There is no
   code path that can submit, post, edit or delete anything.
-- **Any school that uses Canvas** — *if* your school lets students create their own
+- **Any institution that uses Canvas** — *if* your institution lets students create their own
   access tokens. Most do; some have turned it off, and then this connector can't be used
   there. Check first: [Step 1](#step-1--get-your-canvas-access-token) takes one minute
   and tells you before you set anything else up.
@@ -58,7 +58,7 @@ You need a paid claude.ai plan plus two free accounts that take a minute each to
 | **Cloudflare** account → [sign up](https://dash.cloudflare.com/sign-up) | Hosts the connector | free |
 | **GitHub** account → [sign up](https://github.com/signup) — *only for way B* | The Deploy button works by copying this project into a Git account you own, and Cloudflare builds from there. (GitLab works too.) You never need to open it again. | free |
 
-Do Step 1 first — if your school doesn't allow access tokens, you can skip the rest.
+Do Step 1 first — if your institution doesn't allow access tokens, you can skip the rest.
 
 ---
 
@@ -71,18 +71,18 @@ Do Step 1 first — if your school doesn't allow access tokens, you can skip the
 3. Click **Account** (your picture, at the top of the menu on the left — on a phone, tap
    **☰** first) → **Settings**.
 4. Scroll down to **Approved Integrations** and click **+ New Access Token**.
-5. Purpose: `Claude`. Expiry: leave blank, or pick a date if your school requires one.
+5. Purpose: `Canvas MCP connector` (any label — it's just a note to yourself). Expiry: leave blank, or pick a date if your institution requires one.
 6. Click **Generate Token** and **copy the token now** — Canvas only shows it once.
 
 > **Treat the token like a password.** It gives full access to your Canvas account.
 > Don't paste it anywhere except the Cloudflare form in Step 2.
 
-**Don't see "+ New Access Token", or does it fail?** Your school has restricted
-self-service tokens — this is a policy decision by the school, not something you can
+**Don't see "+ New Access Token", or does it fail?** Your institution has restricted
+self-service tokens — this is a policy decision by the institution, not something you can
 change. Two options:
-- Ask your IT help desk for a "Canvas API access token". Some schools issue them on
+- Ask your IT help desk for a "Canvas API access token". Some institutions issue them on
   request, sometimes with a short expiry (e.g. 30 days).
-- If they say no, this connector can't be used at your school. Stop here — don't create
+- If they say no, this connector can't be used at your institution. Stop here — don't create
   the Cloudflare or GitHub accounts.
 
 ---
@@ -103,7 +103,7 @@ change. Two options:
    | `MCP_SECRET` | **A password you invent.** Make it long, and save it in your password manager — you'll type it once in Step 3, and Cloudflare won't show it to you again (you can only replace it). |
 
    Leave `CANVAS_LABEL`, `CANVAS_URL_2`, `CANVAS_TOKEN_2` and `CANVAS_LABEL_2` empty
-   unless you study at two schools — see [Two schools](#two-schools). All of these are
+   unless you study at two institutions — see [Two institutions](#two-institutions). All of these are
    stored encrypted on your Cloudflare account.
 
 5. Click **Create and deploy**. Wait a minute or two while it builds.
@@ -132,8 +132,8 @@ sliders button next to the message box), and try:
 
 ## What you can ask
 
-Claude figures out which tools to use — you just ask. The examples below all work as
-written; swap in your own course names.
+The assistant figures out which tools to use — you just ask. The examples below all work
+as written; swap in your own course names.
 
 **Getting oriented**
 - "List my courses"
@@ -200,7 +200,7 @@ and other command-line tools, see [Connect from other clients](#connect-from-oth
 
 ---
 
-## Two schools
+## Two institutions
 
 If you study at two institutions, fill in the optional fields in Step 2 (or add them
 later under *Settings → Variables and Secrets* on your Worker in the Cloudflare
@@ -208,21 +208,21 @@ dashboard):
 
 | Field | Example |
 |---|---|
-| `CANVAS_LABEL` | `uni` — a short name for the first school (optional; defaults to the Canvas hostname) |
+| `CANVAS_LABEL` | `uni` — a short name for the first institution (optional; defaults to the Canvas hostname) |
 | `CANVAS_URL_2` | `https://canvas.otherschool.edu` |
 | `CANVAS_TOKEN_2` | the token from the second Canvas |
 | `CANVAS_LABEL_2` | `college` |
 
-Claude then asks you which school, or queries both when the question spans them
-("all my deadlines").
+The assistant then asks you which institution, or queries both when the question spans
+them ("all my deadlines").
 
 ---
 
 ## FAQ and troubleshooting
 
-**Claude says the connection failed / asks me to reconnect.**
-Go to claude.ai → Settings → Connectors → Canvas → Connect, and enter your `MCP_SECRET`
-again.
+**The connection failed, or you're asked to reconnect.**
+Go to your client's connector settings (in claude.ai: Settings → Connectors → Canvas →
+Connect) and enter your `MCP_SECRET` again.
 
 **"Canvas responded 401".**
 Your token has expired or been revoked. Create a new one (Step 1), then open the
@@ -235,11 +235,11 @@ It clears on its own, typically within a few hours. Wait and try again; if it la
 than a day, open an issue.
 
 **"No files found" but I know the course has files.**
-The course hides its Files tab. Ask Claude to go through the modules, the syllabus or
-the course pages instead — files linked there are still readable.
+The course hides its Files tab. Ask the assistant to go through the modules, the syllabus
+or the course pages instead — files linked there are still readable.
 
-**Claude can't read a PowerPoint or Word file.**
-Ask Claude for the download link, download the file, then drag it into the chat — Claude
+**The assistant can't read a PowerPoint or Word file.**
+Ask for the download link, download the file, then drag it into the chat — the assistant
 reads it directly there.
 
 **I forgot my `MCP_SECRET`.**
@@ -288,14 +288,14 @@ and the password.
 
 - **The code can only read.** See [SECURITY.md](SECURITY.md) for how and why.
 - **Your token stays with you.** It's stored as an encrypted secret on *your* Cloudflare
-  account. It is never in this repository, never sent anywhere except to your school's
+  account. It is never in this repository, never sent anywhere except to your institution's
   Canvas.
 - **Only you can connect.** The connector is protected by the password you choose,
   with a limit on login attempts.
-- **Your school can see the token being used** (which pages, when), like any Canvas
-  app. It cannot see what you ask Claude.
-- **Everything Claude reads goes to Anthropic** as part of your conversation, under your
-  claude.ai privacy settings.
+- **Your institution can see the token being used** — which pages, when, and any search
+  terms you use — like any Canvas app. It cannot see what you ask the assistant.
+- **Everything the assistant reads goes to your AI provider** (Anthropic, if you use
+  Claude) as part of the conversation, under that account's privacy settings.
 
 ---
 
