@@ -13,7 +13,7 @@ import { encodePageUrl, extractLinks, fence, htmlToText, linksBlock } from "./ut
  * Endpoints are documented at https://developerdocs.instructure.com/services/canvas.
  */
 export class CanvasMCP extends McpAgent<Env, Record<string, never>, Record<string, never>> {
-  server = new McpServer({ name: "canvas-claude-connector", version: "1.0.0" });
+  server = new McpServer({ name: "canvas-mcp-connector", version: "1.0.0" });
 
   private cfg: SchoolConfig[] = [];
   private get multi(): boolean {

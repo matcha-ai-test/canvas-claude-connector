@@ -47,7 +47,7 @@ echo "Logged in (account …${ACCOUNT_ID: -6})."
 # --- 3. KV namespace --------------------------------------------------------------------
 say "3/6  Storage for login tokens"
 PLACEHOLDER="00000000000000000000000000000000"
-KV_TITLE="canvas-claude-connector-oauth"
+KV_TITLE="canvas-mcp-connector-oauth"
 CURRENT_ID=$(grep -oE '"id": *"[0-9a-f]{32}"' wrangler.jsonc | grep -oE '[0-9a-f]{32}' | head -1 || true)
 if [ -z "$CURRENT_ID" ] || [ "$CURRENT_ID" = "$PLACEHOLDER" ]; then
   KV_ID=$($WR kv namespace list 2>/dev/null | tr -d '\n' | grep -oE "\"id\": *\"[0-9a-f]{32}\", *\"title\": *\"$KV_TITLE\"" | grep -oE '[0-9a-f]{32}' | head -1 || true)
@@ -106,7 +106,7 @@ case "$HTTP" in
 esac
 
 MCP_SECRET="${MCP_SECRET:-}"
-SECRET_FILE="$HOME/.canvas-claude-connector"
+SECRET_FILE="$HOME/.canvas-mcp-connector"
 if [ -z "$MCP_SECRET" ] && [ -f "$SECRET_FILE" ]; then MCP_SECRET=$(cat "$SECRET_FILE"); fi
 if [ -z "$MCP_SECRET" ]; then
   MCP_SECRET=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 32)
@@ -130,7 +130,7 @@ if [ -z "$WORKER_URL" ]; then
     WORKER_URL=$(echo "$DEPLOY_OUT" | grep -oE 'https://[a-z0-9.-]+\.workers\.dev' | head -1 || true)
   fi
 fi
-[ -n "$WORKER_URL" ] || fail "Deployed, but could not find the Worker URL. Open https://dash.cloudflare.com → Workers & Pages → canvas-claude-connector and copy the workers.dev address."
+[ -n "$WORKER_URL" ] || fail "Deployed, but could not find the Worker URL. Open https://dash.cloudflare.com → Workers & Pages → canvas-mcp-connector and copy the workers.dev address."
 
 printf '%s' "$CANVAS_URL"   | $WR secret put CANVAS_URL   >/dev/null 2>&1 || fail "Could not store CANVAS_URL."
 printf '%s' "$CANVAS_TOKEN" | $WR secret put CANVAS_TOKEN >/dev/null 2>&1 || fail "Could not store CANVAS_TOKEN."

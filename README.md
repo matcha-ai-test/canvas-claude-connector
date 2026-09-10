@@ -31,7 +31,7 @@ ahead — the code is MIT and the tools are plain MCP.)
 **A. Let Claude Code install it (recommended if you have Claude Code).**
 Open Claude Code and paste:
 
-> Install https://github.com/matcha-ai-test/canvas-claude-connector
+> Install https://github.com/matcha-ai-test/canvas-mcp-connector
 
 Claude Code downloads the project and runs the installer. Your browser opens once so you
 can create a free Cloudflare account (or log in), then two dialog boxes ask for your
@@ -42,7 +42,7 @@ commands to type.
 
 **B. Click the button** (no Claude Code needed; you need a free GitHub account).
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/matcha-ai-test/canvas-claude-connector)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/matcha-ai-test/canvas-mcp-connector)
 
 Then follow Steps 1–3 below.
 
@@ -109,7 +109,7 @@ change. Two options:
 5. Click **Create and deploy**. Wait a minute or two while it builds.
 6. When it's done you land on your Worker's page. Your connector's address is listed
    there (under *Domains & Routes*, or as the "Visit" link) and looks like
-   `https://canvas-claude-connector.something.workers.dev`. **Copy it.**
+   `https://canvas-mcp-connector.something.workers.dev`. **Copy it.**
 
 ---
 
@@ -118,7 +118,7 @@ change. Two options:
 1. Open [claude.ai](https://claude.ai) → **Settings** → **Connectors**.
 2. Click **Add custom connector**.
 3. Name: `Canvas`. In **Remote MCP server URL**, paste your address from Step 2 **with
-   `/mcp` on the end**, e.g. `https://canvas-claude-connector.something.workers.dev/mcp`
+   `/mcp` on the end**, e.g. `https://canvas-mcp-connector.something.workers.dev/mcp`
 4. Click **Add**, then **Connect**.
 5. A small page opens asking for a **connection password**. Enter the `MCP_SECRET` you
    invented in Step 2 and click **Approve**.
